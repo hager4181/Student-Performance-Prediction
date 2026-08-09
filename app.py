@@ -13,39 +13,159 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS
+# Dark Mode CSS
 st.markdown(
     """
     <style>
-    .main {
-        background-color: #f5f7fa;
+
+    /* Main background */
+    .stApp {
+        background: #0e1117;
+        color: #ffffff;
     }
 
-    .result {
-        padding: 25px;
-        border-radius: 15px;
+    /* Main content */
+    .main {
+        background: #0e1117;
+    }
+
+    /* Title */
+    .main-title {
         text-align: center;
-        background-color: white;
-        box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-        margin-top: 20px;
+        font-size: 42px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 5px;
+    }
+
+    /* Subtitle */
+    .subtitle {
+        text-align: center;
+        font-size: 18px;
+        color: #a8b3c7;
+        margin-bottom: 30px;
+    }
+
+    /* Section headers */
+    h2, h3 {
+        color: #ffffff !important;
+    }
+
+    /* Labels */
+    label {
+        color: #e6e6e6 !important;
+    }
+
+    /* Select boxes and number inputs */
+    div[data-baseweb="select"] > div,
+    div[data-testid="stNumberInput"] input {
+        background-color: #1b1f2a !important;
+        color: #ffffff !important;
+        border: 1px solid #3a4252 !important;
+        border-radius: 8px !important;
+    }
+
+    /* Select box text */
+    div[data-baseweb="select"] span {
+        color: #ffffff !important;
+    }
+
+    /* Number input */
+    div[data-testid="stNumberInput"] input {
+        color: #ffffff !important;
+    }
+
+    /* Dropdown menu */
+    div[data-baseweb="popover"] {
+        background-color: #1b1f2a !important;
+    }
+
+    div[role="option"] {
+        background-color: #1b1f2a !important;
+        color: #ffffff !important;
+    }
+
+    div[role="option"]:hover {
+        background-color: #2a3140 !important;
+    }
+
+    /* Prediction button */
+    .stButton > button {
+        width: 100%;
+        background: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 14px;
+        font-size: 18px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .stButton > button:hover {
+        background: #1d4ed8;
+        color: white;
+        border: none;
+    }
+
+    /* Prediction result */
+    .result {
+        background: #161b26;
+        border: 1px solid #30384a;
+        border-radius: 16px;
+        padding: 30px;
+        text-align: center;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+    }
+
+    .result h2 {
+        color: #cbd5e1 !important;
+        margin-bottom: 10px;
     }
 
     .result h1 {
-        font-size: 45px;
+        color: #60a5fa !important;
+        font-size: 52px;
+        margin: 5px 0;
     }
+
+    .result h3 {
+        color: #e2e8f0 !important;
+    }
+
+    /* Dataframe */
+    div[data-testid="stDataFrame"] {
+        border: 1px solid #30384a;
+        border-radius: 10px;
+    }
+
+    /* Info box */
+    div[data-testid="stAlert"] {
+        background-color: #161b26;
+        border: 1px solid #30384a;
+        color: #dbeafe;
+    }
+
+    /* Divider */
+    hr {
+        border-color: #30384a !important;
+    }
+
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Title
+# Header
 st.markdown(
-    "<h1>🎓 Student Performance Prediction</h1>",
+    '<div class="main-title">🎓 Student Performance Prediction</div>',
     unsafe_allow_html=True
 )
 
 st.markdown(
-    "<p>Predict a student's expected Math Score using Machine Learning</p>",
+    '<div class="subtitle">Predict a student\'s expected Math Score using Machine Learning</div>',
     unsafe_allow_html=True
 )
 
@@ -121,10 +241,7 @@ with col2:
 st.divider()
 
 # Prediction button
-if st.button(
-    "🔮 Predict Math Score",
-    use_container_width=True
-):
+if st.button("🔮 Predict Math Score", use_container_width=True):
 
     # Create input DataFrame
     new_student = pd.DataFrame({
